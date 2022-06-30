@@ -1,12 +1,11 @@
 <?php
 
-    function createUserSubjectsDatabase($html) {
-        $Subkle
-        foreach($html -> find('.chosen') as $selected) {
-            
-        }
-
+function createUserSubjectsDatabase($html)
+{
+    $subjects = [];
+    foreach ($html->find('.chosen') as $selected) {
     }
+}
 
 ?>
 
