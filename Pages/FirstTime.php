@@ -33,6 +33,6 @@ function createUserSubjectsDatabase($html)
 
     </div>
 </body>
-<script src="../Scripts/Welcome.js"></script>
+<script src="../Scripts/FirstTime.js"></script>
 
 </html>

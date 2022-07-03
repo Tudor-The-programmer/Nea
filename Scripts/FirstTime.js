@@ -16,8 +16,11 @@ class Subject {
 
     //To make every single one unique the use of the index is needed
     element.classList.add("subject" + this.index);
-    //This is to style all of them at one
+    //This is to style all of them at once
     element.classList.add("random");
+    //adds a name to the element to allow for php to work with it
+    element.setAttribute('name','subjects[]')
+
     //adds the subject name into the div to be diplayed
     element.appendChild(content);
     //The whole div element with the legible text is put into the space array
