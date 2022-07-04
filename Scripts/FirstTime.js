@@ -7,34 +7,50 @@ class Subject {
   }
 
   create() {
-    //create the subject div
-    const element = document.createElement("button");
-    //The subject name must be read
-    const content = document.createTextNode(this.subject);
-    //this is to place the created div inside of a predone dive
-    const parent = document.querySelector(".space");
+    //Creating a parent div
+    const parentDiv = document.createElement("div");
+    parentDiv.classList.add("random");
+    parentDiv.setAttribute("id", "div-styling" + this.index);
+
+    //Creating a div for both the label and the text to style and also fix a bug
+    const elementDiv = document.createElement("div");
+    elementDiv.setAttribute('id', 'element-div-styling')
+
+    //Creating the form
+    const finalParent = document.querySelector("form");
+
+    //creating the label for each of the subjects
+    const newLabel = document.createElement("label");
+    newLabel.setAttribute("for", "checkbox");
+    newLabel.innerHTML = this.subject;
+
+    //creating the inputs for the different subjects
+    const element = document.createElement("input");
+    element.setAttribute("type", "checkbox");
+    element.setAttribute("id", "checkbox");
 
     //To make every single one unique the use of the index is needed
     element.classList.add("subject" + this.index);
-    //This is to style all of them at once
-    element.classList.add("random");
     //adds a name to the element to allow for php to work with it
-    element.setAttribute('name','subjects[]')
+    element.setAttribute("name", "subjects[]");
 
-    //adds the subject name into the div to be diplayed
-    element.appendChild(content);
-    //The whole div element with the legible text is put into the space array
-    parent.appendChild(element);
+    elementDiv.appendChild(newLabel);
+    elementDiv.appendChild(element);
+
+    parentDiv.appendChild(elementDiv); 
+
+    finalParent.appendChild(parentDiv);
+    document.body.appendChild(finalParent);
   }
 
   place() {
     //ensure that no two elements are being styled at the same time as this will break the site
-    const element = document.querySelector(".subject" + this.index);
+    const element = document.getElementById("element-div-styling");
 
     //initating two random numbers for the width and height of the element to be placed
 
-    var top = Math.random() * 80;
-    var left = Math.random() * 200;
+    var top = Math.random() * 500;
+    var left = Math.random() * 50;
 
     //Quick check to ensure the buttons don't overlap the title
     while ((top > 40 && top < 65) || top > 96 || top < 5) {
@@ -49,66 +65,23 @@ class Subject {
     console.log(left);
 
     //styles the element accoding to the values given
-    element.style.top = top + "%";
-    element.style.left = left + "%";
+    element.style.marginTop = top + "px";
+    element.style.marginLeft = left + "px";
   }
 }
 
-//Easily add more subjects in
-let listOfSubject = [
+let subject = [
   "Maths",
-  "Physics",
-  "Biology",
-  "Chemisty",
-  "Computer science",
+  "Computer Science",
+  "Further Maths",
   "History",
   "Geography",
-  "English",
-];
+  "Pscycology"]
 
-//Create the new divs for all of the subjects
-for (var i = 0; i < listOfSubject.length; i++) {
+
+for (var i = 0; i < subject.length; i++) {
   //passes through the subject name as well as an index
-  let sub = new Subject(listOfSubject[i], i);
+  let sub = new Subject(subject[i], i);
   sub.create();
   sub.place();
 }
-
-//Applies an onclick function to all of the subjects in the array
-for (var i = 0; i < listOfSubject; i++) {
-  button = document.getElementsByClassName("subject" + i);
-}
-
-//Nice animation for user
-const subtext = document.querySelector(".subtext");
-const subbutton = document.querySelector(".submit-button");
-
-
-const checkScroll = function () {
-  const x = window.scrollX;
-  //as soon as the user starts scrolling the subtext is gone
-  if (x == 0) {
-    subtext.remove();
-    subbutton.className = "submit-button show";
-
-  } else {
-    subtext.className = "subtext";
-  }
-};
-
-const scrollContainer = document.querySelector(".space");
-scrollContainer.addEventListener("wheel", (evt) => {
-  evt.preventDefault();
-  scrollContainer.scrollLeft += evt.deltaY;
-});
-
-document.querySelectorAll(".random").forEach((item) => {
-  item.addEventListener("click", (event) => {
-    item.classList.toggle('chosen');
-  });
-});
-
-scrollContainer.addEventListener("scroll", checkScroll);
-
-//Takes in the space which the subjects take up and allows the user to scroll with the mouse for better user experience
-

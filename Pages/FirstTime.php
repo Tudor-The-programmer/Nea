@@ -1,11 +1,6 @@
 <?php
 
-function createUserSubjectsDatabase($html)
-{
-    $subjects = [];
-    foreach ($html->find('.chosen') as $selected) {
-    }
-}
+
 
 ?>
 
@@ -21,18 +16,15 @@ function createUserSubjectsDatabase($html)
 </head>
 
 <body>
-
-    <h1 class='title'>Glad you made it</h1>
-    <p class='subtext'>Scroll along the subject and pick what you do!</p>
-
-    <!--Buuton which will call the function to create a user file-->
-    <button class="submit-button">Happy? Click here!</button>
-
-
-    <div class="space">
-
-    </div>
+    <h1>
+        Glad you made it!
+    </h1>
+    <form action="./FirstTime.php" method="post">
+        
+    </form>
 </body>
+
+
 <script src="../Scripts/FirstTime.js"></script>
 
 </html>
