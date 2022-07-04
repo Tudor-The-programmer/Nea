@@ -19,8 +19,11 @@
     <h1>
         Glad you made it!
     </h1>
-    <form action="./FirstTime.php" method="post">
-        
+    <p>
+        Select what you want to do!
+    </p>
+    <form action="./FirstTime.php" method="post" id='form'>
+
     </form>
 </body>
 

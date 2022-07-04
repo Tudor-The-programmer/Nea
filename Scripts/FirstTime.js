@@ -7,17 +7,16 @@ class Subject {
   }
 
   create() {
-    //Creating a parent div
+    //loading the form
+    const form = document.getElementById("form");
+
+    //creating a parent div to style appropriately
     const parentDiv = document.createElement("div");
-    parentDiv.classList.add("random");
-    parentDiv.setAttribute("id", "div-styling" + this.index);
+    parentDiv.setAttribute("class", "form-element-style");
 
     //Creating a div for both the label and the text to style and also fix a bug
     const elementDiv = document.createElement("div");
-    elementDiv.setAttribute('id', 'element-div-styling')
-
-    //Creating the form
-    const finalParent = document.querySelector("form");
+    elementDiv.setAttribute("id", "element-div-styling");
 
     //creating the label for each of the subjects
     const newLabel = document.createElement("label");
@@ -30,43 +29,27 @@ class Subject {
     element.setAttribute("id", "checkbox");
 
     //To make every single one unique the use of the index is needed
-    element.classList.add("subject" + this.index);
+    element.setAttribute("class", this.subject);
     //adds a name to the element to allow for php to work with it
     element.setAttribute("name", "subjects[]");
 
+    //Placing all attributes sequentially
     elementDiv.appendChild(newLabel);
     elementDiv.appendChild(element);
-
-    parentDiv.appendChild(elementDiv); 
-
-    finalParent.appendChild(parentDiv);
-    document.body.appendChild(finalParent);
+    parentDiv.appendChild(elementDiv);
+    form.appendChild(parentDiv);
   }
 
-  place() {
-    //ensure that no two elements are being styled at the same time as this will break the site
-    const element = document.getElementById("element-div-styling");
+  layer() {
+    //this is used to layer the form correctly removing the 'Maths bug'
+    const target = document.getElementById("element-div-styling");
+    target.style.zIndex = this.index;
+  }
 
-    //initating two random numbers for the width and height of the element to be placed
-
-    var top = Math.random() * 500;
-    var left = Math.random() * 50;
-
-    //Quick check to ensure the buttons don't overlap the title
-    while ((top > 40 && top < 65) || top > 96 || top < 5) {
-      top = Math.random() * 100;
-    }
-
-    top = Math.floor(top);
-    left = Math.floor(left);
-
-    //debugging purposes
-    console.log(top);
-    console.log(left);
-
-    //styles the element accoding to the values given
-    element.style.marginTop = top + "px";
-    element.style.marginLeft = left + "px";
+  logVal() {
+    //this is for debugging
+    console.log(this.subject);
+    console.log(this.index);
   }
 }
 
@@ -76,12 +59,12 @@ let subject = [
   "Further Maths",
   "History",
   "Geography",
-  "Pscycology"]
-
+  "Pscycology",
+];
 
 for (var i = 0; i < subject.length; i++) {
   //passes through the subject name as well as an index
   let sub = new Subject(subject[i], i);
   sub.create();
-  sub.place();
+  sub.logVal();
 }
