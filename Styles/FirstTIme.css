@@ -15,8 +15,22 @@ form {
     height: 100vh;
     display: grid;
     grid-template-columns: 25% 50% 25%;
+}
 
+.submit-button {
+    position: absolute;
+    width: 16vw;
+    height: 5vh;
+    top: 60vh;
+    left: 52.5vw;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    transition: 0.2s;
+}
 
+.submit-button:hover {
+    scale: 1.2;
 }
 
 .form-element-style {
@@ -28,17 +42,22 @@ form {
 }
 
 #element-div-styling {
-    padding: 1em;
+    padding: 3em;
     pointer-events: all; 
+    transition: 0.2s;
 }
 
 #element-div-styling:hover {
     scale: 2;
 }
 
+#checkbox {
+    padding: 10px;
+}
+
 h1 {
     position: absolute;
-    top: 50vh;
+    top: 48vh;
     left: 27vw;
     font-size: 7.5vh;
 }
@@ -54,7 +73,7 @@ h1::before {
 
 p {
     position: absolute;
-    top: 58vh;
-    left: 49vw;
-    font-size: 1.5rem;
+    top: 56vh;
+    left: 44vw;
+    font-size: 3vh;
 }

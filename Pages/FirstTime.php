@@ -20,10 +20,10 @@
         Glad you made it!
     </h1>
     <p>
-        Select what you want to do!
+        Select what you want to do:
     </p>
     <form action="./FirstTime.php" method="post" id='form'>
-
+        <input type="submit" value="Happy? click here!" class="submit-button">
     </form>
 </body>
 
