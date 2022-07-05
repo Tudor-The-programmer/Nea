@@ -16,12 +16,15 @@
 </head>
 
 <body>
-    <h1>
-        Glad you made it!
-    </h1>
-    <p>
-        Select what you want to do:
-    </p>
+    <div class="text-space">
+        <h1>
+            Glad you made it!
+        </h1>
+        <p>
+            Select what you want to do:
+        </p>
+    </div>
+
     <form action="./FirstTime.php" method="post" id='form'>
         <input type="submit" value="Happy? click here!" class="submit-button">
     </form>

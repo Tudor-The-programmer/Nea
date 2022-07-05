@@ -38,7 +38,7 @@ function isEmpty($credientials)
         if (empty($values)) {
             echo 'Input all fields please';
             return false;
-        } 
+        }
 
         //This is code to fix the spacebar bug, if a user inputted spaces to trip the system this would catch it
         //The str_split method creates an array out of the characters and puts then in valid
@@ -54,12 +54,13 @@ function isEmpty($credientials)
 }
 
 //Added function for email check using the same method as the emtpy string check 
-function emailCheck($email) {
+function emailCheck($email)
+{
     $valid = str_split($email);
     if (!in_array('@', $valid)) {
         echo 'Invalid email!';
         return false;
-    } else{
+    } else {
         return true;
     }
 }
@@ -84,7 +85,7 @@ if (isset($_POST['login'])) {
 
 
 if (isset($_POST['signup'])) {
-    
+
     /*
     If a user signs up the different checks will be put in place to ensure the user doesnt
     1) Have the same username
@@ -114,15 +115,24 @@ if (isset($_POST['signup'])) {
     $check4 = emailCheck($email);
 
     //Only if all of the criteria is met will the user be allowed in 
-    if ($check1 == true and $check2 == true and $check3 == true and $check == true) {
+    if ($check1 == true and $check2 == true and $check3 == true and $check4 == true) {
         //opens the file in write mode
-        $fp = fopen('G:\Server\htdocs\Nea\Databases\Login.csv', 'a');
-        //puts data into the file
-        fputcsv($fp, $dbInput);
-        //closes the file for best practive
-        fclose($fp);
-        header("Location: http://localhost/nea/Pages/FirstTime.php");
-        exit();
+        $conn = mysqli_connect('localhost', 'tudor', 'Cbbccbbc11', 'Login');
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        //the sql statements for the database:
+        $sql = "INSERT INTO `users` (`NAME`, `EMAIL`, `PASSWORD`) VALUES ('$uname', '$email', '$passw')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+            header("Location: http://localhost/nea/Pages/FirstTime.php");
+            exit();
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 }
 

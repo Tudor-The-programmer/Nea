@@ -21,6 +21,7 @@ class Subject {
     //creating the label for each of the subjects
     const newLabel = document.createElement("label");
     newLabel.setAttribute("for", "checkbox");
+    newLabel.setAttribute("id", "subject-text");
     newLabel.innerHTML = this.subject;
 
     //creating the inputs for the different subjects
@@ -34,8 +35,8 @@ class Subject {
     element.setAttribute("name", "subjects[]");
 
     //Placing all attributes sequentially
-    elementDiv.appendChild(newLabel);
     elementDiv.appendChild(element);
+    elementDiv.appendChild(newLabel);
     parentDiv.appendChild(elementDiv);
     form.appendChild(parentDiv);
   }
