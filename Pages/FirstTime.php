@@ -32,7 +32,10 @@
     </div>
 
     <form action="./FirstTime.php" method="post" id='form'>
-        <input type="submit" value="Happy? click here!" class="submit-button">
+        <div class="button-container">
+            <input type="submit" value="Happy? click here!" class="submit-button">
+        </div>
+        
     </form>
 </body>
 

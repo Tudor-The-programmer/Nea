@@ -55,12 +55,12 @@ class Subject {
 }
 
 let subject = [
-  "Maths",
-  "Computer Science",
-  "Further Maths",
   "History",
+  "Computer Science",
   "Geography",
   "Pscycology",
+  "Further Maths",
+  "Maths",
 ];
 
 for (var i = 0; i < subject.length; i++) {
