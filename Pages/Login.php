@@ -65,25 +65,42 @@ function emailCheck($email)
     }
 }
 
-
+//if the login button is pressed
 if (isset($_POST['login'])) {
-
     $uname = $_POST['uname'];
     $passw = $_POST['passw'];
 
-    $list = array(
-        $uname, $passw
-    );
+    //connect to the database
+    $conn = mysqli_connect('localhost', 'tudor', 'ADMIN1', 'Login');
 
-    //This connects the Login cvs file to the webpage to keep the files separate from eachother
-    $fp = fopen('', 'a');
+    //if the connection fails
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    //sql to check the username and password is correct
+    $sql = "SELECT COUNT(`NAME`)" . "FROM `users`" . "WHERE `NAME` = '$uname' AND `PASSWORD` = '$passw';";
 
-    fputcsv($fp, $list);
+    $result = mysqli_query($conn, $sql);
+    $row = json_encode(mysqli_fetch_row($result));
+    //if not error will appear
+    /*
+    NOTE: this is a strange work around, the json_encode creates a string of an array of an object, strange?
+    Absolutely but does it work, yes! The index 2 just so happens to store the value of the amount of rows, if this is 0
+    then no values are there meaning that there is not user by those details.
+    */
 
-    fclose($fp);
+    if ($row[2] == 0) {
+        echo 'Invalid username and/or Password';
+    } else {
+        //if all is passed then it will go to the next user
+        header('Location: http://localhost/nea/Pages/MainPage.php');
+        exit();
+    }
 }
 
 
+
+//if the signup button is pressed
 if (isset($_POST['signup'])) {
 
     /*
@@ -94,7 +111,7 @@ if (isset($_POST['signup'])) {
      */
 
     /*
-    Added security features:
+    Added security features due to tests:
     1) Do not allow for spaces
     2) Make sure that email has an @
      */
@@ -117,7 +134,7 @@ if (isset($_POST['signup'])) {
     //Only if all of the criteria is met will the user be allowed in 
     if ($check1 == true and $check2 == true and $check3 == true and $check4 == true) {
         //opens the file in write mode
-        $conn = mysqli_connect('localhost', 'tudor', 'Cbbccbbc11', 'Login');
+        $conn = mysqli_connect('localhost', 'tudor', 'ADMIN1', 'Login');
 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -127,11 +144,10 @@ if (isset($_POST['signup'])) {
         $sql = "INSERT INTO `users` (`NAME`, `EMAIL`, `PASSWORD`) VALUES ('$uname', '$email', '$passw')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
             header("Location: http://localhost/nea/Pages/FirstTime.php");
             exit();
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error";
         }
     }
 }
