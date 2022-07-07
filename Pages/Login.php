@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 function checkPassords($pass, $check)
 {
     //simple function to ensure the user types their password correctly
@@ -13,7 +15,7 @@ function checkPassords($pass, $check)
 function checkUsernames($username)
 {
     //opens the csv file containing the users detailers
-    $file = file('G:\Server\htdocs\Nea\Databases\Login.csv');
+    $file = file($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv');
     //As PHP uses assosiative each element has a key and a value so this must be stated
     foreach ($file as $key => $value) {
         //This is creating a variable, for each line i the csv and the values are represented as an array
@@ -65,38 +67,53 @@ function emailCheck($email)
     }
 }
 
+/*Now all of the checks are fininshed its now the functions for storing it*/
+function signIn($dbInput, $uname, $passw)
+{
+    //opens the file in append mode
+    /*Had a major issue with compatibnility across different devices as the path to the file would always change
+    this change in the code allows for a remote user to input to file wihtout changing the path */
+    $db = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv', 'a') or die('Could not open');
+    //Puts the values into the csv file 
+    fputcsv($db, $dbInput);
+    //closes the file
+    fclose($db);
+
+    $_SESSION['uname'] = $uname;
+    $_SESSION['passw'] = $passw;
+
+    header('Location: http://localhost/nea/Pages/FirstTime.php');
+    exit();
+}
+
+/*Creating the login function*/
+function login($uname, $passw)
+{
+
+
+    //opens the csv file containing the users detailers
+    $file = file($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv');
+    //As PHP uses assosiative each element has a key and a value so this must be stated
+    foreach ($file as $key => $value) {
+        //This is creating a variable, for each line i the csv and the values are represented as an array
+        $line = explode(",", $value);
+        //we go into the first element in an array, which by my design is the username
+        //If the username is present in the array we return a false as a flag
+        if ($line[0] == $uname and $line[2] == $passw) {
+            header('Location: http://localhost/nea/Pages/MainPage.php');
+            exit();
+        }
+    }
+}
+
 //if the login button is pressed
 if (isset($_POST['login'])) {
     $uname = $_POST['uname'];
     $passw = $_POST['passw'];
 
-    //connect to the database
-    $conn = mysqli_connect('localhost', 'tudor', 'ADMIN1', 'Login');
-
-    //if the connection fails
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    //sql to check the username and password is correct
-    $sql = "SELECT COUNT(`NAME`)" . "FROM `users`" . "WHERE `NAME` = '$uname' AND `PASSWORD` = '$passw';";
-
-    $result = mysqli_query($conn, $sql);
-    $row = json_encode(mysqli_fetch_row($result));
-    //if not error will appear
-    /*
-    NOTE: this is a strange work around, the json_encode creates a string of an array of an object, strange?
-    Absolutely but does it work, yes! The index 2 just so happens to store the value of the amount of rows, if this is 0
-    then no values are there meaning that there is not user by those details.
-    */
-
-    if ($row[2] == 0) {
-        echo 'Invalid username and/or Password';
-    } else {
-        //if all is passed then it will go to the next user
-        header('Location: http://localhost/nea/Pages/MainPage.php');
-        exit();
-    }
+    login($uname, $passw);
 }
+
 
 
 
@@ -133,22 +150,10 @@ if (isset($_POST['signup'])) {
 
     //Only if all of the criteria is met will the user be allowed in 
     if ($check1 == true and $check2 == true and $check3 == true and $check4 == true) {
-        //opens the file in write mode
-        $conn = mysqli_connect('localhost', 'tudor', 'ADMIN1', 'Login');
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        //the sql statements for the database:
-        $sql = "INSERT INTO `users` (`NAME`, `EMAIL`, `PASSWORD`) VALUES ('$uname', '$email', '$passw')";
-
-        if ($conn->query($sql) === TRUE) {
-            header("Location: http://localhost/nea/Pages/FirstTime.php");
-            exit();
-        } else {
-            echo "Error";
-        }
+        signIn($dbInput, $uname, $passw);
+        $_SESSION['uname'] = $uname;
+        header('Location: http://localhost/nea/Pages/FirstTime.php');
+        exit();
     }
 }
 
