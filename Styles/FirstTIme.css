@@ -52,7 +52,8 @@ form {
 }
 
 .submit-button:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .form-element-style {
@@ -111,7 +112,7 @@ h1 {
 h1::before, h1::after {
     content: "";
     height: 0.2%;
-    width: 37rem;
+    width: 37.6rem;
     position: absolute;
     display: flex;
     transform: scaleX(0);

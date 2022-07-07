@@ -30,7 +30,7 @@ class Subject {
     element.setAttribute("id", "checkbox");
 
     //To make every single one unique the use of the index is needed
-    element.setAttribute("class", this.subject);
+    element.setAttribute("value", this.subject);
     //adds a name to the element to allow for php to work with it
     element.setAttribute("name", "subjects[]");
 

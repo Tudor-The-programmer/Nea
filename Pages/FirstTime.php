@@ -1,8 +1,35 @@
 <?php
 
+session_start();
+$uname = $_SESSION['uname'];
 
+function getChecked()
+{
+    $subjects = [];
+    if (isset($_POST['submit'])) {
+        if (!empty($_POST['subjects'])) {
+            foreach ($_POST['subjects'] as $selected) {
+                array_push($subjects, $selected);
+            }
+        }
+    }
+    return $subjects;
+}
 
+$dbInput = getChecked();
+
+if (count($dbInput) != 0) {
+    $db = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/Users/' . $uname . '.csv', 'w') or die('Could not open');
+
+    fputcsv($db, $dbInput);
+    fclose($db);
+
+    header('Location: http://localhost/nea/Pages/MainPage.php');
+    exit();
+}
 ?>
+
+<!-------------------------------------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +60,9 @@
 
     <form action="./FirstTime.php" method="post" id='form'>
         <div class="button-container">
-            <input type="submit" value="Happy? click here!" class="submit-button">
+            <input type="submit" value="Happy? click here!" class="submit-button" name='submit'>
         </div>
-        
+
     </form>
 </body>
 

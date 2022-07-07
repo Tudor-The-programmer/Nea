@@ -100,6 +100,7 @@ function login($uname, $passw)
         //we go into the first element in an array, which by my design is the username
         //If the username is present in the array we return a false as a flag
         if ($line[0] == $uname and $line[2] == $passw) {
+            $_SESSION['uname'] = $uname;
             header('Location: http://localhost/nea/Pages/MainPage.php');
             exit();
         }
@@ -159,7 +160,7 @@ if (isset($_POST['signup'])) {
 
 ?>
 
-<!-------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -177,19 +178,22 @@ if (isset($_POST['signup'])) {
     </div>
     <div class="container">
         <div class="buttons">
-            <!--Both buttons will have a popup form-->
+            <!--Both buttons will have a popup form on click will call each function-->
             <button class="login" onclick="togglelogin()">Login</button>
             <button class="signup" onclick="toggleSignup()">Singup</button>
         </div>
         <!--The login form, the variables will pass though into the php and check with the database-->
         <form class="login-form" action="Login.php" method="post">
+            <!--This is for the username section-->
             <label for="uname">Username: </label>
             <input type="text" name="uname" id="uname">
+            <!--This is for the password section-->
             <label for="passw">password: </label>
             <input type="password" name="passw" id="passw">
             <input type="submit" value="Submit" name="login">
         </form>
         <form class="signup-form" action="Login.php" method="post">
+            <!--This is for the email section-->
             <label for="email">Email: </label>
             <input type="text" name="email" id="email">
             <label for="uname">Username: </label>
