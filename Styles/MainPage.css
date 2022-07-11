@@ -17,6 +17,9 @@
 body {
     display: flex;
     flex-direction: row;
+    background-image: linear-gradient(55deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #6b1bff 100%);
+    background-size: 400%;
+    animation: bg-animation 25s infinite alternate;
 }
 
 .title {

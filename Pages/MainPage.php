@@ -30,7 +30,7 @@ class SubjectTemplate
 
         $x = 1;
         while ($x < $counter + 1) {
-            echo '<a>Unit' . $x . '</a>';
+            echo '<a href="http://localhost/nea/Pages/StudyPage.php?subject=' . $this->subject .  '&Unit=Unit' . $x . '">' . 'Unit' . $x . '</a>';
             $x++;
         }
     }

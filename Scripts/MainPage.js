@@ -20,10 +20,3 @@ function toggleActive(id) {
   buttonPanel.classList.toggle("invisible");
 }
 
-const div = document.getElementById('');
-
-div.addEventListener("mousemove", function (e) {
-  x = e.offsetX;
-  y = e.offsetY;
-  div.style.backgroundColor = "rgb(${x}, ${y}, ${x - y})";
-});
