@@ -15,7 +15,7 @@ function checkPassords($pass, $check)
 function checkUsernames($username)
 {
     //opens the csv file containing the users detailers
-    $file = file($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv');
+    $file = file($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/Login.csv');
     //As PHP uses assosiative each element has a key and a value so this must be stated
     foreach ($file as $key => $value) {
         //This is creating a variable, for each line i the csv and the values are represented as an array

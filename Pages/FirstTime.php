@@ -24,6 +24,8 @@ if (count($dbInput) != 0) {
     fputcsv($db, $dbInput);
     fclose($db);
 
+    $_SESSION['subjects'] = $dbInput;
+
     header('Location: http://localhost/nea/Pages/MainPage.php');
     exit();
 }
