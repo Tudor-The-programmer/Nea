@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', sans-serif;;
+}
+
+@keyframes bg-animation {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+h1 {
+    margin-left: 7%;
+    font-size: 500%;
+    color: white
+}
+
+.tab-container {
+    display: flex;
+    width: 8vw;
+    height: 100vh;
+    flex-direction: column;
+    background-color: rgba(22, 22, 22, 0.419);
+    border-end-end-radius: 5em;
+}
+
+nav {
+    flex-direction: column;
+    display: flex;
+    height: 88vh;
+    justify-content: space-evenly;
+}
+
+.subject, .home {
+    transform: rotate(-90deg);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+    transition: 0.3s;
+    height: 100%;
+    transition-timing-function: cubic-bezier(0.3,-0.01, 0.44, 0.95);
+}
+
+.contentainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 75vh;
+    align-self: center;
+    margin-top: 5%;
+}
+
+.contentainer::before {
+    content: '';
+    height: 75%;
+    width: 0.3%;
+    position: absolute;
+    background-color: black;
+}
+
+.text-area {
+    height: 100%;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.419);
+    border-radius: 3rem;
+}
+
+h3 {
+    position: relative;
+    margin: 5%;
+    font-size: 3rem;
+    width: 50%;
+    background-image: linear-gradient(55deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #6b1bff 100%);
+    background-size: 800%;
+    animation: bg-animation 10s infinite alternate;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+ul {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 50%;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 50%;
+    padding: 5%;
+}
+
+.panel {
+    height: 100%;
+}
+
+
+.active {
+    transform: rotate(0);
+    transform: scale(1.2);
+}
+
+.subject:hover, .home:hover, .subject:focus, .home:focus{
+    transform: scale(1.2);
+}
+
+.subject:active, .home:active{
+    transform: scaleY(2);
+} 
+
+.invisible  {
+    display: none;
+    transform: scale(0);
+    visibility: hidden;
+}
