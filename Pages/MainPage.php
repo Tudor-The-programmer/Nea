@@ -5,7 +5,7 @@ $subjects = $_SESSION['subjects'];
 function displaySubjects($subjects)
 {
     foreach ($subjects as $subject) {
-        echo '<a classname =subject >' . $subject . '</a>';
+        echo '<button classname =subject >' . $subject . '</a>';
     }
 }
 
@@ -31,9 +31,8 @@ function displaySubjects($subjects)
     </h1>
     <div class="container">
         <nav>
-            <a class="home">Home</a>
-            <?php displaySubjects($subjects);
-            echo $_SERVER['DOCUMENT_ROOT'] ?>
+            <button class="home">Home</a>
+                <?php displaySubjects($subjects); ?>
         </nav>
     </div>
 
