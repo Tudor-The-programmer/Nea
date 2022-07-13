@@ -100,7 +100,9 @@ function login($uname, $passw)
         //we go into the first element in an array, which by my design is the username
         //If the username is present in the array we return a false as a flag
         if ($line[0] == $uname and $line[2] == $passw) {
+            $file = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/Users/' . $uname . '.csv', 'r');
             $_SESSION['uname'] = $uname;
+            $_SESSION['subjects'] = fgetcsv($file);
             header('Location: http://localhost/nea/Pages/MainPage.php');
             exit();
         }
