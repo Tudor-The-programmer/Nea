@@ -1,5 +1,5 @@
 //Import the quiz object
-import { Quiz } from "./MainFunctions.js";
+import { Quiz } from "./Quiz/MainFunctions.js";
 //Get an array from the StudyPage.php file
 let array = JSON.parse(document.getElementById("invisible").innerHTML);
 //To not allow for the user to cheat by changing the answer
@@ -19,5 +19,8 @@ for (let i = 0; i < array.length; i++) {
 
 //Create a new quiz object
 let quiz = new Quiz(questions, answers);
-//Show the first question
+
+//starts the whole quiz
 quiz.showQuestion();
+
+
