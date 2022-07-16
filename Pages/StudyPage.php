@@ -2,11 +2,16 @@
 
 session_start();
 
+$uname = $_SESSION['uname'];
+
 $subject = $_GET['subject'];
 $unit = $_GET['Unit'];
 
 
+
 $path = $_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/' . $unit . '.csv';
+$recordsPath = $_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/Scores/' . $uname . '.csv';
+
 
 if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/' . $unit . '.csv', "r")) !== FALSE) {
 
@@ -15,6 +20,10 @@ if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/
     }
 
     fclose($open);
+}
+
+if (isset($_POST['submit'])) {
+    header('Location: http://localhost/nea/Pages/Handler.php?subject=' . $subject . '&Unit=' . $unit);
 }
 
 ?>
@@ -28,18 +37,25 @@ if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Styles/StudyPage.css">
+    <link rel="stylesheet" href="../Styles//StudyPage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
     <title>Sudy hard!</title>
+
+    <!--The type module is needed to allow the imports of the file, in this case the MainFunctions class-->
+    <script type="module" src="../Scripts/StudyPage.js" defer></script>
+    <!--This is for the import of the spashPage function-->
+    <script type="module" src="../Scripts/Quiz/MainFunctions.js" defer></script>
+
+
 </head>
 
 <body>
     <div class="title-container">
         <?php
-        echo '<h1>' . $subject . '</h1>';
-        echo '<h2>' . $unit . '</h2>';
+        echo '<h1 id="subject">' . $subject . '</h1>';
+        echo '<h2 id="unit">' . $unit . '</h2>';
 
         ?>
     </div>
@@ -55,7 +71,7 @@ if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/
 
             </div>
         </div>
-        
+
         <div id="display-text">
             <div id="question"></div>
             <div id="answer"></div>
@@ -82,8 +98,6 @@ if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/
 
 
 
-
-    <script type="module" src="../Scripts/StudyPage.js"></script>
 
 </body>
 

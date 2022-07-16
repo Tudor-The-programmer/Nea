@@ -2,6 +2,7 @@
 
 session_start();
 $subjects = $_SESSION['subjects'];
+$uname = $_SESSION['uname'];
 
 class SubjectTemplate
 {
@@ -57,11 +58,6 @@ function displaySubjects($subjects)
         echo '<button class=subject onclick="toggleActive(id)" id ="' . $subject . '">' . $subject . '</a>';
     }
 }
-
-
-
-
-
 
 ?>
 

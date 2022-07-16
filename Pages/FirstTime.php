@@ -24,6 +24,12 @@ if (count($dbInput) != 0) {
     fputcsv($db, $dbInput);
     fclose($db);
 
+    $db = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/Scores/' . $uname . '.csv', 'w');
+    $headers = array('Subject', 'Unit', 'Score', 'Percentage', 'Date');
+    fputcsv($db, $headers);
+
+    fclose($db);
+
     $_SESSION['subjects'] = $dbInput;
 
     header('Location: http://localhost/nea/Pages/MainPage.php');

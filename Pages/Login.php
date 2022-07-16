@@ -79,9 +79,11 @@ function signIn($dbInput, $uname, $passw)
     //closes the file
     fclose($db);
 
+    //creates a session for the user
     $_SESSION['uname'] = $uname;
     $_SESSION['passw'] = $passw;
 
+    //redirects the user to the First time page to enter their subjectes
     header('Location: http://localhost/nea/Pages/FirstTime.php');
     exit();
 }
