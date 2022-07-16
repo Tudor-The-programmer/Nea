@@ -22,5 +22,3 @@ let quiz = new Quiz(questions, answers);
 
 //starts the whole quiz
 quiz.showQuestion();
-
-

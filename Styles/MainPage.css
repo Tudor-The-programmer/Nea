@@ -122,6 +122,28 @@ a {
     padding: 5%;
 }
 
+#unit {
+    width: 25%;
+}
+
+#unit::before {
+    content: '';
+    height: 0.8%;
+    width: 3.5%;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    margin-top: 1.5%;
+    transform: scaleX(0);
+    transition: 0.3s ;
+
+}
+
+#unit:hover::before {
+    transform: scaleX(1);
+
+}
+
+
 .panel {
     height: 100%;
 }
