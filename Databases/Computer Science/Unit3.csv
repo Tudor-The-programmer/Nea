@@ -1,142 +1,71 @@
 QUESTIONS, ANSWERS
 
 What are records made up of within a database?,Fields
-
 What is structured data?,"Any data that resides in a fixed field within a record or file so that it can be easily entered, store, queried and analysed"
-
 What does CSV stand for?,Comma Separated Values
-
 What is a CSV?,A method of storing a record using comma separated values
-
 What are 3 advantages of using CSV's?,"Simple text-based format, Can be read by many applications, Easy to use"
-
 What are 3 disadvantages of using CSV's?,"Inefficient when using large amounts of data, Can only store text, Unable to search and sort"
-
 What is a flat-file database?,A database in which all the data is stored in a single table
-
 What is redundant data?,Data that is repeated in a database
-
 What is a primary key?,A field used to uniquely identify a specific row of data from a table
-
 What is a foreign key?,A primary key of one table that appears as an attribute in another table and acts to provide a logical relationship between the two tables
-
 What is a relational database?,A set of tables whose records are linked by certain fields
-
 What are the three types of entity relationships?,"One to one, One to many, Many to many"
-
 What is a one to one relationship?,A relationship where one entity is linked to one other entity
-
 What is a one to many relationship?,A relationship where one entity is linked to several entities
-
 What is a many to many relationship?,A relationship where several entities are linked to several other entities
-
 What is an example of a one to one relationship?,Person to driving license
-
 What is an example of a one to many relationship?,"Manufacturer to models 1, 2 and 3"
-
 What is an example of a many to many relationship?,"Parent 1 and 2 to children 1, 2 and 3"
-
-What is referential integrity?,Referential integrity helps to ensure that there are no data redundancy and inaccuracies between linked tables, and prevents a record containing a foreign key from using a value that doesn't exist in the linked table where it is a primary key
-
+What is referential integrity?,"Referential integrity helps to ensure that there are no data redundancy and inaccuracies between linked tables, and prevents a record containing a foreign key from using a value that doesn't exist in the linked table where it is a primary key"
 How many stages of normalisation are there?,3
-
-What 3 rules must a database in 1st normal form obey?,All rows must be unique
-Each cell must only contain a single value
-Each value should be non-divisible
-
+What 3 rules must a database in 1st normal form obey?,"All rows must be unique, Each cell must only contain a single value, Each value should be non-divisible"
 What 2 rules must a database in 2nd normal form obey?,Database must be in first normal form. Non-partial dependency - All non-prime attributes should be fully functionally dependent on the primary key
-
-What 2 rules must a database in 3rd normal form obey?,Database must be in first and second normal form. No transitive dependency - All fields must only be determinable by the primary/composite key, not by other keys
-
+What 2 rules must a database in 3rd normal form obey?,"Database must be in first and second normal form. No transitive dependency - All fields must only be determinable by the primary/composite key, not by other keys"
 What are the 7 main SQL statements?,"CREATE, SELECT, UPDATE, DELETE, ORDER BY, WHERE, INSERT INTO"
-
 What does the SQL statement CREATE do?,Creates a database table
-
 What does the SQL statement SELECT do?,Selects data
-
 What does the SQL statement UPDATE do?,Edits data
-
 What does the SQL statement DELETE do?,Removes data
-
 What does the SQL statement ORDER BY do?,Orders data by either ASC or DESC (Ascending or Descending)
-
 What does the SQL statement INSERT INTO do?,Adds new data
-
 What is the SQL statement WHERE similar to?,An if statement
-
 What does SQL stand for?,Structured Query Language
-
 What does * stand for in SQL?,All
-
 What does DBMS stand for?,Database Management System
-
 What is a table within a database?,A collection of data that relates to an entity
-
 What is a record within a database?,A collection of data about a single entity
-
 What is a field within a database?,A unique piece of data about any entity
-
 What is a field name within a database?,An identifier for the single pieces of data
-
 What are attributes within a database?,A characteristic of an entity
-
 What is an entity with a database?,Something in the real world that we store data about
-
 What is normalisation?,The process of restructuring a database in order to reduce data redundancy and improve data integrity
-
 When do we use a junction table?,When we want to make a many to many relationship a many to one
-
 What happens when making a junction table?,The ID's of both tables are combined
-
 What are the two types of compression?,Lossy Lossless
-
 What is compression?,The process of making a files size smaller
-
 What is lossy compression?,"Lossy compression works by permanently removing some of the data from a file. However, enough of the data remains so that the file is still useful and there are no noticeable differences"
-
 What is lossless compression?,Compression in which all the original data can be recovered when the file is decompressed
-
 Which type of compression results in greater reduction of the file size?,Lossy
-
 What is lossless compression good for?,"Executable files, where all the data is necessary"
-
 What does RLE stand for?,Run-length encoding
-
 What is RLE?,A form of lossless compression that replaces repeating sequences of 0s and 1s with more efficient representations
-
 How does RLE work?,Each repeating string is replaced by a code which represents the character and the amount of times it is to be repeated
-
-How does RLE work for images?,In images adjacent pixels are likely to be similar colours. Image compression algorithms group pixels together and give them an average colour.
-This technique is lossy
-
+How does RLE work for images?,In images adjacent pixels are likely to be similar colours. Image compression algorithms group pixels together and give them an average colour. This technique is lossy
 What is encryption?,The process of scrambling data according to a specific algorithm so it can't be read by third parties
-
 What are encryption keys used for?,Encryption Keys are used to scramble and unscramble the data in a message. It would take an impractical amount of time to guess the key so we say that the encryption is secure
-
 What is hashing?,The process of taking an input and performing some form of calculation on the input which will output a value of a fixed size
-
 What is the output of a hashing algorithm called?,A hash
-
 Why is a hashing algorithm so secure?,It can't be reversed
-
 What can hashing be used for?,Storing passwords
-
 What software do search engines make use of?,Web crawlers
-
 Where do web crawlers store key information about each page they search?,In an index
-
 What is search engine indexing?,The method of collecting information about various web pages and storing them in an index which will be used by the search engine to find results for a web user's search
-
 What is the Page Rank Algorithm?,A method of ranking web pages based on how important they are for the user's search
-
 What is the damping factor set to in the pagerank algorithm calculation?,0.85
-
 Which side processing is used for more complex processing?,Server-side
-
 What is client-side processing?,Client side processing is when information is processed on the user's local device
-
 What is server-side processing?,Server side processing is when a client sends information to a server for processing
-
 What is a disadvantage of server-side processing?,Busy websites can put excessive demands on web servers
-
 What is a disadvantage of client-side processing?,Relies on the user's device which may not be optimal for the task

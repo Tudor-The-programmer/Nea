@@ -8,15 +8,14 @@ $unit = $_GET['Unit'];
 
 $path = $_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/' . $unit . '.csv';
 
-$file_to_read = fopen($path, 'r');
+if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/' . $unit . '.csv', "r")) !== FALSE) {
 
-while (!feof($file_to_read)) {
-    $questionArray[] = fgetcsv($file_to_read, 1000, ',');
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+        $array[] = $data;
+    }
+
+    fclose($open);
 }
-fclose($file_to_read);
-
-$questions = fopen($path, 'r') or die('Failed to load questions');
-$header = fgetcsv($questions);
 
 ?>
 
@@ -41,19 +40,51 @@ $header = fgetcsv($questions);
         <?php
         echo '<h1>' . $subject . '</h1>';
         echo '<h2>' . $unit . '</h2>';
-        //This is a way to pass through to the javascrip as a variable to manipulate
-        //It doesnt appear as the styling makes it not exists to the user
-        echo '<div id="invisible">' . json_encode($questionArray) . '</div>';
+
         ?>
     </div>
 
+    <?php
+    //This is a way to pass through to the javascrip as a variable to manipulate
+    //It doesnt appear as the styling makes it not exists to the user
+    echo '<div id="invisible">' . json_encode($array) . '</div>';
+    ?>
+    <div class="container">
+        <div class="contentainer">
+            <div id="question-or-answer">
 
-    <div class="contentainer">
-        <div class="question" id="question">
-            <button onclick="quiz.handleClick()">Toggle answer</button>
-            <button onclick="quiz.handleClick()">Next question</button>
+            </div>
         </div>
-        <script src="../Scripts/tes.js"></script>
+        
+        <div id="display-text">
+            <div id="question"></div>
+            <div id="answer"></div>
+        </div>
+        <div id="button-field">
+            <button id="show-answer-button">Show answer</button>
+        </div>
+
+        <div id="how-did-you-do">
+            <button id="good">
+                Good
+            </button>
+            <button id="okay">
+                Okay
+            </button>
+            <button id="bad">
+                Bad
+            </button>
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+    <script type="module" src="../Scripts/StudyPage.js"></script>
+
 </body>
 
 

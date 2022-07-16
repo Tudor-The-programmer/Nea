@@ -1,0 +1,2 @@
+The issue was that once the answer button was pressed
+once the program would allow the user to bypass showing the answer

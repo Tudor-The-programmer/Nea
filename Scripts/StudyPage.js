@@ -1,69 +1,23 @@
-class Quiz {
-  constructor(questions, answers, count) {
-    this.questions = questions;
-    this.answers = answers;
-    this.count = count;
-  }
-
-  firstQuestion() {
-    if (this.count == 1) {
-      let div = document.getElementById("question");
-      let display = document.createElement("p");
-
-      display.setAttribute("id", this.questions[this.count]);
-
-      let node = document.createTextNode(this.questions[this.count]);
-
-      display.appendChild(node);
-      div.appendChild(display);
-      this.count += 1;
-    } else {
-      return;
-    }
-  }
-
-  removeCurrentQuestion() {
-    let element = document.getElementById(this.questions[this.count - 1]);
-    element.remove();
-  }
-
-  handleClick() {
-    let div = document.getElementById("question");
-    let display = document.createElement("p");
-
-    display.setAttribute("id", this.questions[this.count]);
-
-    let node = document.createTextNode(this.questions[this.count]);
-
-    this.removeCurrentQuestion(div, display);
-    display.appendChild(node);
-    div.appendChild(display);
-
-    this.count += 1;
-  }
-}
-
-let array = document.getElementById("invisible").innerHTML;
+//Import the quiz object
+import { Quiz } from "./MainFunctions.js";
+//Get an array from the StudyPage.php file
+let array = JSON.parse(document.getElementById("invisible").innerHTML);
+//To not allow for the user to cheat by changing the answer
+document.body.removeChild(document.getElementById("invisible"));
 
 let questions = [];
 let answers = [];
 
-array = array.replaceAll("[", "");
-array = array.replaceAll("]", "");
-
-console.log(array);
-
-
-
-for (let i = 1; i != array.length; i++) {
-  if (i % 2 != 0) {
-    questions.push(array[i - 1]);
-  } else {
-    answers.push(array[i - 1]);
+/*Assign the from the larger array questions and answers to the questions
+and answers array*/
+for (let i = 0; i < array.length; i++) {
+  if (array[i][0] != null) {
+    questions.push(array[i][0]);
+    answers.push(array[i][1]);
   }
 }
 
-console.log(questions);
-
-let quiz = new Quiz(questions, answers, 1);
-quiz.firstQuestion();
+//Create a new quiz object
+let quiz = new Quiz(questions, answers);
+//Show the first question
+quiz.showQuestion();
