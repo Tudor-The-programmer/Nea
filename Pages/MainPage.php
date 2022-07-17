@@ -98,8 +98,8 @@ function displaySubjects($subjects)
                 </h3>
 
                 <ul>
-                    <a href=' '>Summary</a>
-                    <a href=' '>Graphs</a>
+                    <a href='../Pages/StatPages/Summary.php'>Summary</a>
+                    <a href='../Pages/StatPages/Graphs.php'>Graphs</a>
                 </ul>
             </div>
 
