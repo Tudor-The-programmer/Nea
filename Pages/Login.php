@@ -24,7 +24,7 @@ function checkUsernames($username)
         //If the username is present in the array we return a false as a flag
         if ($line[0] == $username) {
 
-            echo 'Username is already taken!';
+            echo '<div class="error">Username is already taken!</div>';
             return false;
         }
     }
@@ -38,7 +38,7 @@ function isEmpty($credientials)
     //for every value the check will be false if there isnt any characters in the input
     foreach ($credientials as $values) {
         if (empty($values)) {
-            echo 'Input all fields please';
+            echo '<div class="error">Input all fields please</div>';
             return false;
         }
 
@@ -48,7 +48,7 @@ function isEmpty($credientials)
         //It then checks the array for any space characters ' ' 
         if (in_array(' ', $valid)) {
             //if there is the subsiquent error message is presented and the check will be false
-            echo 'Spaces are invalid characters here!';
+            echo '<div class="error">Spaces are invalid characters here!</div>';
             return false;
         }
     }
@@ -60,7 +60,7 @@ function emailCheck($email)
 {
     $valid = str_split($email);
     if (!in_array('@', $valid)) {
-        echo 'Invalid email!';
+        echo '<div class="error">Invalid email!</div>';
         return false;
     } else {
         return true;
@@ -91,25 +91,32 @@ function signIn($dbInput, $uname, $passw)
 /*Creating the login function*/
 function login($uname, $passw)
 {
-
-
     //opens the csv file containing the users detailers
-    $file = file($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv');
-    //As PHP uses assosiative each element has a key and a value so this must be stated
-    foreach ($file as $key => $value) {
-        //This is creating a variable, for each line i the csv and the values are represented as an array
-        $line = explode(",", $value);
-        //we go into the first element in an array, which by my design is the username
-        //If the username is present in the array we return a false as a flag
-        if ($line[0] == $uname and $line[2] == $passw) {
-            $file = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/Users/' . $uname . '.csv', 'r');
-            $_SESSION['uname'] = $uname;
-            $_SESSION['subjects'] = fgetcsv($file);
-            header('Location: http://localhost/nea/Pages/MainPage.php');
-            exit();
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv';
+
+    if (($handle = fopen($file, "r")) !== FALSE) {
+        //As PHP uses assosiative each element has a key and a value so this must be stated
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            //This is creating a variable, for each line i the csv and the values are represented as an array
+            $pass = explode(",", $data[2]);
+            $name = explode(",", $data[0]);
+
+            //we go into the last element in an array, which by my design is the password
+            //If the password is present in the array we return a true as a flag
+            //This is used to check if the username is also present in the array
+            if ($name[0] == $uname && password_verify($passw, $pass[0])) {
+                //creates a session for the user
+                $_SESSION['uname'] = $uname;
+                //redirects the user to the First time page to enter their subjectes
+                header('Location: http://localhost/nea/Pages/MainPage.php');
+                exit();
+            }
         }
+        echo '<div class="error">Incorrect username or password</div>';
     }
 }
+
+
 
 //if the login button is pressed
 if (isset($_POST['login'])) {
@@ -144,9 +151,13 @@ if (isset($_POST['signup'])) {
     $email = $_POST['email'];
     $passw = $_POST['passw'];
     $passwcheck = $_POST['passwcheck'];
+
+    //Hashing the password for security
+    $passw_hashed = password_hash($passw, PASSWORD_BCRYPT);
+
     //puts all data values into an array
     $credientials = array($uname, $email, $passw, $passwcheck);
-    $dbInput = array($uname, $email, $passw);
+    $dbInput = array($uname, $email, $passw_hashed);
 
     $check1 = checkPassords($passw, $passwcheck);
     $check2 = checkUsernames($uname);
@@ -174,6 +185,10 @@ if (isset($_POST['signup'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flash(card)</title>
     <link rel="stylesheet" href="../Styles/Login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -192,9 +207,9 @@ if (isset($_POST['signup'])) {
             <label for="uname">Username: </label>
             <input type="text" name="uname" id="uname">
             <!--This is for the password section-->
-            <label for="passw">password: </label>
+            <label for="passw">Password: </label>
             <input type="password" name="passw" id="passw">
-            <input type="submit" value="Submit" name="login">
+            <input class="submit-button" type="submit" value="Submit" name="login">
         </form>
         <form class="signup-form" action="Login.php" method="post">
             <!--This is for the email section-->
@@ -206,7 +221,7 @@ if (isset($_POST['signup'])) {
             <input type="password" name="passw" id="passw">
             <label for="passwcheck">Confirm password</label>
             <input type="password" name="passwcheck" id='passwcheck'>
-            <input type="submit" value="Enter!" name="signup">
+            <input onclick="checkError()"  class="submit-button" type="submit" value="Enter!" name="signup">
         </form>
     </div>
 </body>

@@ -98,10 +98,8 @@ function displaySubjects($subjects)
                 </h3>
 
                 <ul>
-                    <a href=' '>Progress</a>
-                    <a href=' '>Most Worked On</a>
-                    <a href=' '>Best Units</a>
-
+                    <a href=' '>Summary</a>
+                    <a href=' '>Graphs</a>
                 </ul>
             </div>
 
