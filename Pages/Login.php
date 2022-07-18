@@ -91,9 +91,15 @@ function signIn($dbInput, $uname, $passw)
 /*Creating the login function*/
 function login($uname, $passw)
 {
+    //Pass through the subjects that the user has 
+    $subjects = [];
+    $subjectfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/users/' . $uname . '.csv', 'r');
+    while (($line = fgetcsv($subjectfile)) !== false) {
+        $subjects = $line;
+    }
+
     //opens the csv file containing the users detailers
     $file = $_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv';
-
     if (($handle = fopen($file, "r")) !== FALSE) {
         //As PHP uses assosiative each element has a key and a value so this must be stated
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -101,12 +107,16 @@ function login($uname, $passw)
             $pass = explode(",", $data[2]);
             $name = explode(",", $data[0]);
 
+            echo json_encode($name);
+            echo json_encode($pass);
+
             //we go into the last element in an array, which by my design is the password
             //If the password is present in the array we return a true as a flag
             //This is used to check if the username is also present in the array
             if ($name[0] == $uname && password_verify($passw, $pass[0])) {
                 //creates a session for the user
                 $_SESSION['uname'] = $uname;
+                $_SESSION['subjects'] = $subjects;
                 //redirects the user to the First time page to enter their subjectes
                 header('Location: http://localhost/nea/Pages/MainPage.php');
                 exit();
@@ -221,7 +231,7 @@ if (isset($_POST['signup'])) {
             <input type="password" name="passw" id="passw">
             <label for="passwcheck">Confirm password</label>
             <input type="password" name="passwcheck" id='passwcheck'>
-            <input onclick="checkError()"  class="submit-button" type="submit" value="Enter!" name="signup">
+            <input onclick="checkError()" class="submit-button" type="submit" value="Enter!" name="signup">
         </form>
     </div>
 </body>
