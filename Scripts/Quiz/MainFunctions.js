@@ -34,14 +34,40 @@ export class Quiz {
       this.showAnswer();
     });
 
+    document.addEventListener("keyup", (event) => {
+      if (event.code === "Space") {
+        this.showAnswer();
+      }
+    });
+
     this.good.addEventListener("click", (event) => {
       this.goodClicked();
     });
+
+    document.addEventListener("keyup", (event) => {
+      if (event.key == 1) {
+        this.goodClicked();
+      }
+    });
+
     this.bad.addEventListener("click", (event) => {
       this.badClicked();
     });
+
+    document.addEventListener("keyup", (event) => {
+      if (event.key == 3) {
+        this.badClicked();
+      }
+    });
+
     this.okay.addEventListener("click", (event) => {
       this.okayClicked();
+    });
+
+    document.addEventListener("keyup", (event) => {
+      if (event.key == 3) {
+        this.okayClicked();
+      }
     });
   }
   showQuestion() {
@@ -49,7 +75,7 @@ export class Quiz {
     this.question.innerHTML = this.questions[this.currentIndex];
   }
   showAnswer() {
-    this.answer.innerHTML = this.answers[this.currentIndex];
+    this.answer.innerHTML = "Answer: " + this.answers[this.currentIndex];
     this.showAnswerButton.classList.add("true");
   }
   removeAnswer() {

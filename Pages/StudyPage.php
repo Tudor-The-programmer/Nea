@@ -65,33 +65,33 @@ if (isset($_POST['submit'])) {
     //It doesnt appear as the styling makes it not exists to the user
     echo '<div id="invisible">' . json_encode($array) . '</div>';
     ?>
+    <div class="back-btn">
+        <a href="../Pages/MainPage.php" class="back">Back</a>
+    </div>
     <div class="container">
-        <div class="contentainer">
-            <div id="question-or-answer">
-
-            </div>
-        </div>
-
         <div id="display-text">
             <div id="question"></div>
             <div id="answer"></div>
         </div>
-        <div id="button-field">
-            <button id="show-answer-button">Show answer</button>
+
+        <div class="button-container">
+            <div id="button-field">
+                <button id="show-answer-button">Show answer</button>
+            </div>
+
+            <div id="how-did-you-do">
+                <button id="good">
+                    Good
+                </button>
+                <button id="okay">
+                    Okay
+                </button>
+                <button id="bad">
+                    Bad
+                </button>
+            </div>
         </div>
 
-        <div id="how-did-you-do">
-            <button id="good">
-                Good
-            </button>
-            <button id="okay">
-                Okay
-            </button>
-            <button id="bad">
-                Bad
-            </button>
-
-        </div>
     </div>
     </div>
 
