@@ -34,6 +34,7 @@ export class Quiz {
       this.showAnswer();
     });
 
+    //Added further listeners for key presses for the user's experience
     document.addEventListener("keyup", (event) => {
       if (event.code === "Space") {
         this.showAnswer();
@@ -177,6 +178,7 @@ export class Quiz {
       this.questions.splice(randomIndex, 0, this.questions[this.currentIndex]);
       this.answers.splice(randomIndex, 0, this.answers[this.currentIndex]);
 
+      //this will show the question but earlier than if okay was clicked
       this.answers.splice(this.currentIndex, 1);
       this.questions.splice(this.currentIndex, 1);
 
