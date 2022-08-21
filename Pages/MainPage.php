@@ -17,22 +17,23 @@ class SubjectTemplate
 
     public function diplsyAllUnits()
     {
-        $flag = true;
-        $counter = 0;
-        $unit = 1;
-        while ($flag) {
-            if (file_exists($this->subjectFile . '/Unit' . $unit . '.csv')) {
-                $counter += 1;
-                $unit += 1;
-            } else {
-                $flag = false;
-            }
-        }
+        // Display all units
+        //No naming convention needed anymore now they can be given any name and the code will still work
 
-        $x = 1;
-        while ($x < $counter + 1) {
-            echo '<a id="unit" href="http://localhost/nea/Pages/StudyPage.php?subject=' . $this->subject .  '&Unit=Unit' . $x . '">' . 'Unit' . $x . '</a>';
-            $x++;
+        //Get all files in the subject folder
+        $dir = $this->subjectFile;
+        //Scans files in the subject folder
+        $files = scandir($dir);
+        //Loops through all files in the subject folder
+        foreach ($files as $key => $value) {
+            //Checks if the file is a directory
+            //If it is a directory it will be skipped
+            if ($value != '.' && $value != '..') {
+                //This just removes the .csv for better readability and aesthetics
+                $value = str_replace('.csv', '', $value);
+                //This is the link to the Study page
+                echo '<a href = "StudyPage.php?subject=' . $this->subject . '&Unit=' . $value . '"><div id="unit">' . $value . '</div></a>';
+            }
         }
     }
 }
@@ -40,10 +41,12 @@ class SubjectTemplate
 function setUpUnits($subjects)
 {
     foreach ($subjects as $subject) {
+        //Initialise the subject template
         $sub = new  SubjectTemplate($subject, $_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/' . $subject);
         echo '<div id="' . $subject . '2' . '" class="invisible panel ' . $subject . '">';
         print '<h3>' . $subject . '</h3>';
         echo '<ul>';
+        //Display all units
         print '<a>' . $sub->diplsyAllUnits() . '</a>';
         echo '</ul>';
         echo '</div>';
@@ -55,6 +58,8 @@ function setUpUnits($subjects)
 function displaySubjects($subjects)
 {
     foreach ($subjects as $subject) {
+        //This is added in order to work with the javascript
+        //The javascript will use the subject name to display the correct units
         echo '<button class=subject onclick="toggleActive(id)" id ="' . $subject . '">' . $subject . '</a>';
     }
 }
@@ -108,11 +113,8 @@ function displaySubjects($subjects)
             setUpUnits($subjects);
 
             ?>
-
         </div>
     </div>
-
 </body>
 <script src="../Scripts/MainPage.js"></script>
-
 </html>

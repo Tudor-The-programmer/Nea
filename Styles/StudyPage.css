@@ -90,7 +90,6 @@ body {
 }
 
 #show-answer-button:hover {
-    border-radius: 0;
     transform: scale(1.1);
 }
 
@@ -123,7 +122,7 @@ body {
 }
 
 #good:hover {
-    background-color: green;
+    background-color: rgb(59, 138, 59);
     color: white;
 }
 
@@ -187,9 +186,9 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgb(105, 4, 187);
+    background-color: #2C313C;
     transition: opacity 350ms;
-    animation: fadeIn 3s;
+    animation: fadeIn 1.5s;
 }
 #content {
     display: flex;
@@ -239,7 +238,7 @@ body {
     position: absolute;
     width: 20%;
     height: 10%;
-    background-color: rgb(142, 3, 255);
+    background-color: #414959;
     color: white;
     justify-content: center;
     align-items: center;
@@ -263,5 +262,5 @@ body {
 
 #button:hover, #close-button:hover {
     background-color: white;
-    color: rgb(142, 3, 255);
+    color:wheat;
 }

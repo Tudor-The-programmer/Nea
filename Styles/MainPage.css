@@ -104,6 +104,7 @@ h3 {
     animation: bg-animation 25s infinite alternate;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    flex-wrap: wrap;
 }
 ul {
     margin-left: 5%;
@@ -118,32 +119,29 @@ a {
     text-decoration: none;
     color: white;
     font-size: 1.5rem;
-    width: 50%;
-    padding: 5%;
+    margin-top: 7%;
+    padding: 10px;
+    width: fit-content;  
 }
 
 #unit {
-    width: 25%;
+   width: 100%;
 }
 
-#unit::before {
-    content: '';
-    height: 0.8%;
-    width: 3.8vw;
-    position: absolute;
-    background-color: rgb(255, 255, 255);
-    margin-top: 1.5%;
-    transform: scaleX(0);
-    transition: 0.3s ;
-    transform-origin: left;
-}
-
-#unit:hover::before {
-    transform: scaleX(1);
+a:hover, a:active {
+    color: black;
+    background-color: white;
+    border-radius: 1rem;
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.3,-0.01, 0.44, 0.95);
 }
 
 .panel {
     height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .active {

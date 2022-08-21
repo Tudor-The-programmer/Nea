@@ -93,7 +93,7 @@ function login($uname, $passw)
 {
     //Pass through the subjects that the user has 
     $subjects = [];
-    $subjectfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/users/' . $uname . '.csv', 'r');
+    $subjectfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/users/' . $uname . '.csv', 'r') ;
     while (($line = fgetcsv($subjectfile)) !== false) {
         $subjects = $line;
     }

@@ -1,0 +1,5 @@
+There was an issue that not all subjects used the units system
+while this did work for some, i.e computer science this didnt
+work for all. Therefore on MainPage, lines 20 -> 25 had to be changed.
+This now allowed for any name to be given and still work as well as submit 
+the scores using that 'Unit' name.
