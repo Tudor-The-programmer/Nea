@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+    font-family: 'Work Sans', sans-serif;
+}
+
+body {
+    background-color: #2C313C;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#chartContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:50%;
+    height: 50%;
+}
+
+#button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+}
+
+#mode-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 10%;
+    top: 27%;
+    left: 10%;
+    justify-content: space-evenly;
+}
+
+button{
+    background-color: wheat;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-size: 2em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover, button:active {
+    background-color: #414959;
+    color: wheat;
+    border: 0.1em dashed wheat;
+
+}
+
+a {
+    text-decoration: none;
+    color: wheat;
+    font-size: 2.8em;
+    margin: 1%;
+    font-weight: 700;
+    justify-self: center;
+    transition: 0.3;
+}
+
+a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: wheat;
+    transition: width 0.3s;
+}
+
+a:hover::after {
+    width: 100%;
+    transition: width 0.3s;
+}
+
+
+
+.canvasjs-chart-canvas {
+    border-radius: 1rem;
+}
+
+#date-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 10%;
+    top: 27%;
+    right: 10%;
+    justify-content: space-evenly;
+}
+
+#date {
+    top: 10%;
+    left: 10%;
+    font-size: 0.9em;
+    color: black;
+    font-weight: 700;
+    padding: 1;
+}
+
+#back-button {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-size: 2em;
+    color: #a6b5d6;
+    font-weight: 700;
+    padding: 1;
+}
