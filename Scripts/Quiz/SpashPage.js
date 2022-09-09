@@ -56,7 +56,10 @@ export function SpashPage(score, arrayLength) {
   stat2.setAttribute("class", "description");
   stat2.setAttribute("type", "text");
   stat2.setAttribute("name", "percentage");
-  stat2.setAttribute("value", (score / (arrayLength - 1)) * 100 + "%");
+  stat2.setAttribute(
+    "value",
+    Math.floor((score / (arrayLength - 1)) * 100) + "%"
+  );
   stat2.setAttribute("readonly", "readonly");
 
   const button = document.createElement("button");

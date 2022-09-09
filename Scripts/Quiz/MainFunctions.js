@@ -28,47 +28,27 @@ export class Quiz {
     this.good = document.getElementById("good");
     this.bad = document.getElementById("bad");
     this.okay = document.getElementById("okay");
+    this.again = document.getElementById("again");
 
     //Event listeners for the buttons that will be used in the quiz
     this.showAnswerButton.addEventListener("click", (event) => {
       this.showAnswer();
     });
 
-    //Added further listeners for key presses for the user's experience
-    document.addEventListener("keyup", (event) => {
-      if (event.code === "Space") {
-        this.showAnswer();
-      }
-    });
-
     this.good.addEventListener("click", (event) => {
       this.goodClicked();
-    });
-
-    document.addEventListener("keyup", (event) => {
-      if (event.key == 1) {
-        this.goodClicked();
-      }
     });
 
     this.bad.addEventListener("click", (event) => {
       this.badClicked();
     });
 
-    document.addEventListener("keyup", (event) => {
-      if (event.key == 3) {
-        this.badClicked();
-      }
-    });
-
     this.okay.addEventListener("click", (event) => {
       this.okayClicked();
     });
 
-    document.addEventListener("keyup", (event) => {
-      if (event.key == 3) {
-        this.okayClicked();
-      }
+    this.again.addEventListener("click", (event) => {
+      this.againClicked();
     });
   }
   showQuestion() {
@@ -104,8 +84,6 @@ export class Quiz {
         this.score += 1;
       }
 
-      console.log(this.score);
-
       //Moves to the next question
       this.showQuestion();
       //Remove the next answer from the page
@@ -116,6 +94,9 @@ export class Quiz {
   }
 
   okayClicked() {
+    //this is the ease factor for the user
+    //this number will determine how quickly the user will be shown the question again
+    let ef = this.arrayLength / 3;
     //Quick check to see if the user has seen the question's answer
     if (this.showAnswerButton.classList.contains("true")) {
       //now there is a need to see the question again so add it back to the array
@@ -123,10 +104,10 @@ export class Quiz {
       let randomIndex = -1;
       //Quick check
       if (!(randomIndex >= 0 && randomIndex <= this.arrayLength)) {
-        randomIndex =
-          Math.floor(Math.random() * (this.arrayLength / 2)) +
-          this.arrayLength / 5;
+        randomIndex = Math.floor(Math.random() * ef) + Math.floor(ef);
       }
+
+      console.log(randomIndex);
 
       let flag;
       flag = this.checkAnswer();
@@ -148,8 +129,6 @@ export class Quiz {
 
       //this add the question to the seen questions which removes chance to add points
       this.seenQuestion.push(this.questions[this.currentIndex]);
-      console.log(this.seenQuestion);
-      console.log(this.score);
 
       //Moves to the next question
       this.showQuestion();
@@ -161,6 +140,7 @@ export class Quiz {
   }
 
   badClicked() {
+    let ef = this.arrayLength / 10;
     //Quick check to see if the user has seen the question's answer
     if (this.showAnswerButton.classList.contains("true")) {
       //Ensures that a new number is generated
@@ -168,9 +148,11 @@ export class Quiz {
       //Quick check
       if (!(randomIndex >= 0 && randomIndex <= this.arrayLength)) {
         randomIndex =
-          Math.floor(Math.random() * (this.arrayLength / 2)) +
-          this.arrayLength / 20;
+          Math.floor(Math.random() * ef) +
+          Math.floor(ef) +
+          Math.floor(Math.random() * 2);
       }
+      console.log(randomIndex);
 
       //Add the question and answer back into the array based on the random number
       //This number is changed depending on the length of the array as well as button pressed
@@ -186,8 +168,6 @@ export class Quiz {
       this.showAnswerButton.classList.remove("true");
 
       this.seenQuestion.push(this.questions[this.currentIndex]);
-      console.log(this.seenQuestion);
-      console.log(this.score);
 
       //Moves to the next question
       this.showQuestion();
@@ -196,6 +176,14 @@ export class Quiz {
     } else {
       return;
     }
+  }
+
+  againClicked() {
+    //removes the answer from the question
+    this.removeAnswer();
+    //removes the true flag from the showAnswerButton
+    this.showAnswerButton.classList.remove("true");
+    this.seenQuestion.push(this.questions[this.currentIndex]);
   }
 
   //Function for score to not be allowed if the user has seen the question before
@@ -211,6 +199,8 @@ export class Quiz {
   endOfQuiz() {
     if (this.questions[this.currentIndex] == undefined) {
       SpashPage(this.score, this.arrayLength);
+      //removes inner html of the question and answer
+      this.question.innerHTML = " ";
     }
   }
 }

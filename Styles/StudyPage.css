@@ -99,7 +99,7 @@ body {
     justify-content: space-evenly;
 }
 
-#bad, #good, #okay {
+#bad, #good, #okay, #again {
     border-radius: 0.5rem;
     padding: 0.8rem;
     font-size: 1rem;
@@ -123,6 +123,11 @@ body {
 
 #good:hover {
     background-color: rgb(59, 138, 59);
+    color: white;
+}
+
+#again:hover {
+    background-color: #5EA3DE;
     color: white;
 }
 

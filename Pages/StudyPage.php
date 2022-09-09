@@ -89,6 +89,9 @@ if (isset($_POST['submit'])) {
                 <button id="bad">
                     Bad
                 </button>
+                <button id = "again">
+                    Again
+                </button>
             </div>
         </div>
     </div>
