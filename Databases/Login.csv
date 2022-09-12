@@ -1,2 +1,3 @@
-USERNAME, EMAIL, PASSWORD
-Tudor,t@test.com,$2y$10$eDriEoZZt/S9APlHwp3/ceI4apC6YpfXHq3enPdpGY/BnbEf4iQuC
+USERNAME, EMAIL, PASSWORD, Teacher
+Tudor,t@test.com,$2y$10$eDriEoZZt/S9APlHwp3/ceI4apC6YpfXHq3enPdpGY/BnbEf4iQuC, No
+Thomas,Teacher@gmail.com,$2y$10$SBvnVVAfbVrQotjZ30SC9uMDvADPXqrYyHY945oLFmEkbtpjyyam6,Yes

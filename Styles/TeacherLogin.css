@@ -1,8 +1,23 @@
-*{
-    padding: 0%;
-    margin: 0%;
+* {
+    margin: 0;
     box-sizing: border-box;
     font-family: 'Work Sans', sans-serif;
+}
+
+h1::after {
+    content: ' Portal';
+    color: rgb(0, 110, 255);
+    height: 100%;
+    width: 100%;
+}
+
+h1::before {
+    content: ' ';
+    width: 23%;
+    height: 1%;
+    background-color: black;
+    position: absolute;
+    top:9%
 }
 
 .title {
@@ -13,7 +28,9 @@
     align-items: center;
     font-size: 3.5vh;
     font-weight: 10;
+    color: rgb(255, 60, 0);
 }
+
 
 .buttons {
     width: 100%;
@@ -30,16 +47,15 @@ button {
     font-size: 3.5vh;
     font-weight: 10;
     border-radius: 10px;
-    border: 0.7rem dashed rgb(142, 3, 255);
-    background-color: white;
-    color: rgb(142, 3, 255);
+    color: rgb(0, 110, 255);
     cursor: pointer;
     transition: all 350ms; 
     letter-spacing: 0.5vh;
+    border: none;
 }
 
 button:hover, button:focus {
-    background-color: rgb(142, 3, 255);
+    background-color: rgb(0,110,255);
     color: white;
 }
 
@@ -67,7 +83,7 @@ button:hover, button:focus {
     border-radius: 10px;
     outline: none;
     padding: 1rem;
-    border: 0.2rem dashed rgb(142, 3, 255);
+    border: 0.2rem dashed rgb(255, 60, 0);
     cursor: text;
 }
 
@@ -99,11 +115,11 @@ button:hover, button:focus {
     margin: 5%;
     cursor: pointer;
     transition: all 350ms;
-    align-items: center;
+    cursor: default;
 }
 
 .submit-button:hover, .submit-button:focus {
-    background-color: rgb(142, 3, 255);
+    background-color: rgb(255, 60, 0);
     color: white;
     transform: scale(0.8);
 }
@@ -125,15 +141,4 @@ button:hover, button:focus {
     font-size: 3.5vh;
     font-weight: 10;
     letter-spacing: 0.5vh;
-    top: 2.5%;
-}
-
-#link {
-    text-decoration: none;
-    margin-left: 1vw;
-}
-
-p {
-    position:absolute;
-    letter-spacing: 2p;
 }

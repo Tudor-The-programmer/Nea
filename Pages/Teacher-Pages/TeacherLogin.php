@@ -84,20 +84,13 @@ function signIn($dbInput, $uname, $passw)
     $_SESSION['passw'] = $passw;
 
     //redirects the user to the First time page to enter their subjectes
-    header('Location: http://localhost/nea/Pages/FirstTime.php');
+    header('Location: http://localhost/nea/Pages/Teacher-Pages/CodePage.php');
     exit();
 }
 
 /*Creating the login function*/
 function login($uname, $passw)
 {
-    //Pass through the subjects that the user has 
-    $subjects = [];
-    $subjectfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/users/' . $uname . '.csv', 'r');
-    while (($line = fgetcsv($subjectfile)) !== false) {
-        $subjects = $line;
-    }
-
     //opens the csv file containing the users detailers
     $file = $_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv';
     if (($handle = fopen($file, "r")) !== FALSE) {
@@ -107,18 +100,14 @@ function login($uname, $passw)
             $pass = explode(",", $data[2]);
             $name = explode(",", $data[0]);
 
-            echo json_encode($name);
-            echo json_encode($pass);
-
             //we go into the last element in an array, which by my design is the password
             //If the password is present in the array we return a true as a flag
             //This is used to check if the username is also present in the array
             if ($name[0] == $uname && password_verify($passw, $pass[0])) {
                 //creates a session for the user
                 $_SESSION['uname'] = $uname;
-                $_SESSION['subjects'] = $subjects;
                 //redirects the user to the First time page to enter their subjectes
-                header('Location: http://localhost/nea/Pages/MainPage.php');
+                header('Location: http://localhost/nea/Pages/Teacher-Pages/CodePage.php');
                 exit();
             }
         }
@@ -167,7 +156,7 @@ if (isset($_POST['signup'])) {
 
     //puts all data values into an array
     $credientials = array($uname, $email, $passw, $passwcheck);
-    $dbInput = array($uname, $email, $passw_hashed, 'No');
+    $dbInput = array($uname, $email, $passw_hashed, 'Yes');
 
     $check1 = checkPassords($passw, $passwcheck);
     $check2 = checkUsernames($uname);
@@ -178,14 +167,16 @@ if (isset($_POST['signup'])) {
     if ($check1 == true and $check2 == true and $check3 == true and $check4 == true) {
         signIn($dbInput, $uname, $passw);
         $_SESSION['uname'] = $uname;
-        header('Location: http://localhost/nea/Pages/FirstTime.php');
+        header('Location: http://localhost/nea/Pages/Teacher-Pages/TeacherMainPage.php');
         exit();
     }
 }
 
+
 ?>
 
-<!---------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -193,40 +184,36 @@ if (isset($_POST['signup'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash(card)</title>
-    <link rel="stylesheet" href="../Styles/Login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../Styles/TeacherLogin.css">
+    <title>Teacher Portal</title>
 </head>
 
 <body>
     <div class="title">
-        <h1>In a Flash(card)</h1>
+        <h1>Teacher</h1>
     </div>
     <div class="container">
         <div class="buttons">
             <!--Both buttons will have a popup form on click will call each function-->
             <button class="login" onclick="togglelogin()">Login</button>
             <p>Select either login or sign up!</p>
-            <button class="signup" onclick="toggleSignup()">Singup</button>
+            <button class="signup" onclick="toggleSignup()">Signup</button>
         </div>
         <!--The login form, the variables will pass though into the php and check with the database-->
-        <form class="login-form" action="Login.php" method="post">
+        <form class="login-form" action="TeacherLogin.php" method="post">
             <!--This is for the username section-->
-            <label for="uname">Username: </label>
+            <label for="uname">Surname: </label>
             <input type="text" name="uname" id="uname">
             <!--This is for the password section-->
             <label for="passw">Password: </label>
             <input type="password" name="passw" id="passw">
             <input class="submit-button" type="submit" value="Submit" name="login">
         </form>
-        <form class="signup-form" action="Login.php" method="post">
+        <form class="signup-form" action="TeacherLogin.php" method="post">
             <!--This is for the email section-->
             <label for="email">Email: </label>
             <input type="text" name="email" id="email">
-            <label for="uname">Username: </label>
+            <label for="uname">Surname: </label>
             <input type="text" name="uname" id="uname">
             <label for="passw">Password: </label>
             <input type="password" name="passw" id="passw">
@@ -235,10 +222,8 @@ if (isset($_POST['signup'])) {
             <input onclick="checkError()" class="submit-button" type="submit" value="Enter!" name="signup">
         </form>
     </div>
-    <a id='link' href="./Teacher-Pages/TeacherLogin.php">A Teacher? Click here!</a>
-</body>
 
-<!--Linking the js file-->
-<script src="../Scripts/Login.js"></script>
+</body>
+<script src="../../Scripts/Login.js"></script>
 
 </html>

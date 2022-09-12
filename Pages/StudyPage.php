@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
     echo '<div id="invisible">' . json_encode($array) . '</div>';
     ?>
     <div class="back-btn">
-        <a href="../Pages/MainPage.php" class="back">Back</a>
+        <a href="./MainPage.php" class="back">Back</a>
     </div>
     <div class="container">
         <div id="display-text">
