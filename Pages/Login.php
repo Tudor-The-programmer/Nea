@@ -235,7 +235,6 @@ if (isset($_POST['signup'])) {
             <input onclick="checkError()" class="submit-button" type="submit" value="Enter!" name="signup">
         </form>
     </div>
-    <a id='link' href="./Teacher-Pages/TeacherLogin.php">A Teacher? Click here!</a>
 </body>
 
 <!--Linking the js file-->

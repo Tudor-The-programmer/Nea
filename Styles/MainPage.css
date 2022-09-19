@@ -162,3 +162,54 @@ a:hover, a:active {
     transform: scale(0);
     visibility: hidden;
 }
+
+.input-csv {
+    position: absolute;
+    left: 56.5%;
+    width: 30%;
+    height: 60%;
+    top: 26%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 1.5rem;
+    border: 0.2rem dashed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#file-stat{
+    position: absolute;
+    color: white;
+    left:48%;
+    top:13%;
+    font-size: 1.4em;
+    background-color:rgba(0, 0, 0, 0.419);
+    padding: 0.15em;
+    border-radius: 1rem;
+    justify-content: center;
+}
+
+#file-input-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 60%;
+
+}
+
+#file-form-input {
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: 0.2s all;
+    font-size: 1em;
+}
+
+#file-form-input:hover {
+    color:rgba(22, 22, 22, 0.419)
+}
+

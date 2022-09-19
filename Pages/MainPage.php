@@ -55,12 +55,40 @@ function setUpUnits($subjects)
 
 
 
+
+
 function displaySubjects($subjects)
 {
     foreach ($subjects as $subject) {
         //This is added in order to work with the javascript
         //The javascript will use the subject name to display the correct units
         echo '<button class=subject onclick="toggleActive(id)" id ="' . $subject . '">' . $subject . '</a>';
+    }
+}
+
+
+//Allowing the user to add their own csv files 
+if (isset($_POST["submit"])) {
+
+    if (isset($_FILES["file"])) {
+        $dirpath = $_SERVER['DOCUMENT_ROOT'] . "/NEA/Databases/UserCreatedSets/";
+
+
+        //if there was an error uploading the file
+        if ($_FILES["file"]["error"] > 0) {
+        } else {
+            //Print file details
+            echo "<p id='file-stat'> File uploaded! </p>";
+
+            //if file already exists
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/Databases/UserCreatesSets/" . $_FILES["file"]["name"])) {
+                echo $_FILES["file"]["name"] . " already exists. ";
+            } else {
+                move_uploaded_file($_FILES['file']['tmp_name'], $dirpath . $_FILES['file']['name'] . '- ' . $_SESSION['uname']);
+            }
+        }
+    } else {
+        echo "No file selected <br />";
     }
 }
 
@@ -105,7 +133,17 @@ function displaySubjects($subjects)
                 <ul>
                     <a href='../Pages/StatPages/Summary.php'>Summary</a>
                     <a href='../Pages/StatPages/Graphs.php'>Graphs</a>
+                    <a href="./UserSets.php">User Created sets</a>
                 </ul>
+
+                <div class="input-csv">
+                    <form action="MainPage.php" method="post" enctype="multipart/form-data" id='file-input-form'>
+                        <input id='file-form-input' type="file" name="file" value="" accept=".csv, .txt" />
+                        <input id='file-form-input' type="submit" name="submit" value="Save" />
+                    </form>
+                </div>
+
+
             </div>
 
             <?php
@@ -117,4 +155,5 @@ function displaySubjects($subjects)
     </div>
 </body>
 <script src="../Scripts/MainPage.js"></script>
+
 </html>
