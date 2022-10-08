@@ -1,0 +1,90 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+/* width */
+::-webkit-scrollbar {
+    height: 10%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.contentainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+    background-color: #2C313C;
+    z-index: 2;
+}
+
+.scrolling-container {
+    padding: 10%;
+    width: 80%;
+    height: 90%;
+    border: 1rem solid wheat;
+    overflow-y: auto;
+    background-color: wheat;
+}
+
+#smaller-information {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10%;
+
+}
+
+#spacer {
+    padding-right: 10%;
+}
+
+.left {
+    width: 50%;
+}
+
+.title {
+    padding: 2%;
+    font-size: 450%;
+    z-index: 1;
+    animation: 1.5s ease-out 0s 1 slideInFromLeft;    
+}
+
+.stats {
+    height: 80%;
+    width: 60%;
+    display: flex;
+}

@@ -3,12 +3,15 @@
 session_start();
 $uname = $_SESSION['uname'];
 
+//This function gets called upon submitting
 function getChecked()
 {
     $subjects = [];
     if (isset($_POST['submit'])) {
+        //This stops a user from not checking anything and then submitting 
         if (!empty($_POST['subjects'])) {
             foreach ($_POST['subjects'] as $selected) {
+                //this will form the array of subjects
                 array_push($subjects, $selected);
             }
         }
@@ -16,15 +19,22 @@ function getChecked()
     return $subjects;
 }
 
+//creates the array needed to be added to the datbase
 $dbInput = getChecked();
 
 if (count($dbInput) != 0) {
+    //As this is only called once in the users time, a database write can be used instead to 
+    //create the database as well
     $db = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/Users/' . $uname . '.csv', 'w') or die('Could not open');
 
+    //Puts the values into the database
     fputcsv($db, $dbInput);
+    //Closes the database
     fclose($db);
 
+    //Itialises a score database, also under the username as well
     $db = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/Scores/' . $uname . '.csv', 'w');
+    //creates the headers for the csv
     $headers = array('Subject', 'Unit', 'Score', 'Percentage', 'Date');
     fputcsv($db, $headers);
 
@@ -32,6 +42,7 @@ if (count($dbInput) != 0) {
 
     $_SESSION['subjects'] = $dbInput;
 
+    //Transports the user to the main page
     header('Location: http://localhost/nea/Pages/MainPage.php');
     exit();
 }
@@ -65,9 +76,11 @@ if (count($dbInput) != 0) {
         </div>
 
     </div>
-
+    <!--This contains the form for the subjects-->
     <form action="./FirstTime.php" method="post" id='form'>
         <div class="button-container">
+            <!--The script will place the items into the DOM  into this form-->
+            <!--The submit button is needed to be able to call the function from php-->
             <input type="submit" value="Happy? click here!" class="submit-button" name='submit'>
         </div>
 

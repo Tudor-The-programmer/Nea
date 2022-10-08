@@ -53,10 +53,6 @@ function setUpUnits($subjects)
     }
 }
 
-
-
-
-
 function displaySubjects($subjects)
 {
     foreach ($subjects as $subject) {
@@ -112,7 +108,7 @@ if (isset($_POST["submit"])) {
 <body>
     <div class="title">
         <h1>
-            <?php echo 'Hello ' . $_SESSION['uname'] . '!'; ?>
+            <?php echo 'Hello ' . $uname . '!'; ?>
         </h1>
     </div>
 

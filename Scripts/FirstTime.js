@@ -54,6 +54,7 @@ class Subject {
   }
 }
 
+//these are all the subjects that are available on the site
 let subject = [
   "History",
   "Computer Science",

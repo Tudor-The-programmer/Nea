@@ -91,12 +91,7 @@ function signIn($dbInput, $uname, $passw)
 /*Creating the login function*/
 function login($uname, $passw)
 {
-    //Pass through the subjects that the user has 
-    $subjects = [];
-    $subjectfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/users/' . $uname . '.csv', 'r');
-    while (($line = fgetcsv($subjectfile)) !== false) {
-        $subjects = $line;
-    }
+
 
     //opens the csv file containing the users detailers
     $file = $_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/login.csv';
@@ -107,16 +102,23 @@ function login($uname, $passw)
             $pass = explode(",", $data[2]);
             $name = explode(",", $data[0]);
 
-            echo json_encode($name);
-            echo json_encode($pass);
-
             //we go into the last element in an array, which by my design is the password
             //If the password is present in the array we return a true as a flag
             //This is used to check if the username is also present in the array
             if ($name[0] == $uname && password_verify($passw, $pass[0])) {
                 //creates a session for the user
+
+                //Pass through the subjects that the user has 
+                $subjects = [];
+                $subjectfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/users/' . $uname . '.csv', 'r') or die('Incorrect');
+                while (($line = fgetcsv($subjectfile)) !== false) {
+                    $subjects = $line;
+                }
+
                 $_SESSION['uname'] = $uname;
                 $_SESSION['subjects'] = $subjects;
+
+
                 //redirects the user to the First time page to enter their subjectes
                 header('Location: http://localhost/nea/Pages/MainPage.php');
                 exit();
@@ -210,7 +212,7 @@ if (isset($_POST['signup'])) {
             <!--Both buttons will have a popup form on click will call each function-->
             <button class="login" onclick="togglelogin()">Login</button>
             <p>Select either login or sign up!</p>
-            <button class="signup" onclick="toggleSignup()">Singup</button>
+            <button class="signup" onclick="toggleSignup()">Signup</button>
         </div>
         <!--The login form, the variables will pass though into the php and check with the database-->
         <form class="login-form" action="Login.php" method="post">
@@ -237,7 +239,7 @@ if (isset($_POST['signup'])) {
     </div>
 </body>
 
-<!--Linking the js file-->
+<!--Linking the js file------------------------>
 <script src="../Scripts/Login.js"></script>
 
 </html>

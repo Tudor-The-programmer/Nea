@@ -2,48 +2,70 @@
 
 session_start();
 $name = $_SESSION['uname'];
+$subjects = $_SESSION['subjects'];
 
 $path = $_SERVER['DOCUMENT_ROOT'] . '/nea/Databases/Scores/' . $name . '.csv';
 
 $file = fopen($path, 'r');
 $data = fgetcsv($file, 1000, ',');
 
-//Obtaines all the Data from the csv file apart from the date as it is not needed.
-while (($data = fgetcsv($file, 1000, ',')) !== false) {
-    $Subject[] = $data[0];
-    $Unit[] = $data[1];
-    $Score[] = $data[2];
-    $Percentage[] = $data[3];
-}
 
-//Used to find the Person's Most used Subject
-function subjectTracker($Subject)
+function listOfAllScores($file)
 {
-    //This counts all of the subjects in the array, and returns the number of times it is present
-    $subjectCount = array_count_values($Subject);
-    //This sorts it by accending order
-    arsort($subjectCount);
-    //This returns the first key of the array, which is the most common subject
-    $subjectCount = array_keys($subjectCount);
-    //This returns the value of the most common subject
-    $subjectCount = $subjectCount[0];
-    //This returns the name of the most common subject
-    return $subjectCount;
+    while (($line = fgetcsv($file)) !== false) {
+        echo '<h2 id="subject" >' . $line[0] . '</h2>';
+        echo '<h3 id="unit">' . $line[1] . '</h3>';
+        echo '<div id="smaller-information">';
+        echo '<p id="spacer">' . $line[2] . '</p>';
+        echo '<p>' . $line[3] . '</p>';
+        echo '<p id="spacer">' . $line[4] . '</p>';
+        echo '</div>';
+    }
+    fclose($file);
 }
 
-//This is the most common subject
-$mostUsedSubject = subjectTracker($Subject);
-
-//conbines the units with subjects to create a new array
-$combined = array_merge($Subject, $Unit);
-
-echo json_encode($combined);
-
-
-
-
-echo $mostUsedSubject;
+function obtainStats($file)
+{
+    while (($line = fgetcsv($file)) !== false) {
+        $subject[] = $line[0];
+    }
+}
 
 ?>
 
 <!-------------------------------------------------------------------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Summay.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="contentainer">
+        <div class="scrolling-container">
+            <?php
+
+            listOfAllScores($file);
+
+            ?>
+        </div>
+    </div>
+
+    <div class="left">
+        <h1 class="title">Summary</h1>
+
+        <div class="stats">
+
+        </div>
+    </div>
+</body>
+
+</html>

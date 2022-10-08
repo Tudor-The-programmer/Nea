@@ -1,0 +1,41 @@
+Arithmetic Logic Unit,'The part of the CPU where data is processed and manipulated. This processing and manipulation normally consists of arithmetic operations or logical comparisons allowing a program to make decisions.'
+
+Control Unit,'The part of the CPU that manages the execution of instructions. This part fetches each instruction in sequence, and decodes it before executing it. It also synchronises other parts of the CPU by sending control signals to them.'
+
+Register,'Tiny areas of extremely fast memory located in the CPU normally designed for a specific purpose, where data is stored temporarily.'
+
+Program Counter,'A register which holds the address of the next instruction to be executed.'
+
+Accumulator,'A special register within the ALU. It is used to hold the data currently being processed by the CPU. Any data to be processed is stored temporarily in the accumulator, with the results ending up back in the accumulator.'
+
+Memory Address Register,'A register that stores the address of the memory location currently in use. In the fetch phase, this would be the address of the instruction being loaded; in the execute phase, it would be the address of the data being used.'
+
+Memory Data Register,'A register that stores data being transferred to or from RAM. A data item will be copied here, ready for use at the next clock tick, when it can either be used by the CPU or be stored in RAM.'
+
+Data Bus,'This carries data between the registers and RAM.'
+
+Address Bus,This carries a memory location (somewhere in RAM) which may be written to or read from.
+
+Control Bus,This carries control signals between the different parts of the CPU
+
+Central Processing Unit,'The main part of the computer, consisting of the registers, arithmetic logic unit and control unit.'
+
+Fetch,'The contents of the PC is copied into the MAR. The data stored at the address in MAR, is copied in to the CIR. The PC is incremented.'
+
+Current Instruction Register,'A register that stores the address of the instruction currently being executed and decoded.'
+
+Decode,'The contents of the CIR are sent to the Control Unit. The data is identified i.e. Op-code and Operand could be an instruction and value or memory address and value. A new memory address may be assigned to the MAR now.'
+
+Execute,'The contents of the registers are acted upon. Data may be placed in the MDR and then sent to the ALU which outputs to the Accumulator.'
+
+Hertz,'Measurement for the pulse / tick of the CPU clock.'
+
+Cache,' A small fast type of memory that is built in to the CPU to speed up access to frequently accessed instructions.'
+
+Von Neumann Architecture,'Traditional computer architecture that forms the basis of most digital computer systems. A single control unit manages a linear sequence of "fetch-decode-execute"'
+
+Harvard Architecture,'A computer architecture with physically separate memory areas and signal pathways for instructions and data. Used by RISC processors.'
+
+Complex Instruction Set Computer,'A design that produces a complicated and expensive integrated circuit capable of performing a large variety of complex instructions. Each instruction may mean many machine cycles.'
+
+Reduced Instruction Set Computer,'A design that produces a simple, cheap integrated circuit with a basic range of machine instructions. A single instruction typically takes a single cycle. Complex tasks (such as multiplication) may need many instructions.'
