@@ -17,6 +17,9 @@ for (let i = 0; i < array.length; i++) {
   }
 }
 
+console.log(questions);
+console.log(answers);
+
 //Create a new quiz object
 let quiz = new Quiz(questions, answers);
 

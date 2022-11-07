@@ -120,7 +120,7 @@ $array = $plots->creatingAssociativeArray();
                 data: [{
                     type: mode, //change type to bar, line, area, pie, etc
                     //indexLabel: "{y}", //Shows y value on all Data Points
-                    indexLabelFontColor: "#5A5757",
+                    indexLabelFontColor: "#FFFFFF",
                     indexLabelPlacement: "outside",
                     dataPoints: <?php echo json_encode($array, JSON_NUMERIC_CHECK); ?>
                 }]
@@ -151,7 +151,7 @@ $array = $plots->creatingAssociativeArray();
                 data: [{
                     type: "column", //change type to bar, line, area, pie, etc
                     //indexLabel: "{y}", //Shows y value on all Data Points
-                    indexLabelFontColor: "#5A5757",
+                    indexLabelFontColor: "#FFFFFF",
                     indexLabelPlacement: "outside",
                     dataPoints: <?php echo json_encode($array, JSON_NUMERIC_CHECK); ?>
                 }]
@@ -176,14 +176,6 @@ $array = $plots->creatingAssociativeArray();
         <button onclick='loadChart("column")'>Bar</button>
         <button onclick='loadChart("area")'>Area</button>
     </div>
-
-    <div id="date-container">
-        <button id='date'>All time</button>
-        <button id='date'>Year</button>
-        <button id='date'>Month</button>
-        <button id='date'>Week</button>
-    </div>
-
     <a id='back-button' href="../MainPage.php">Back</a>
 
     <div id="chartContainer"></div>

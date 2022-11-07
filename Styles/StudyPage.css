@@ -111,22 +111,22 @@ body {
     height: 100%;
 }
 
-#bad:hover {
+#bad:hover, #bad:focus {
     background-color: #E06C6A;
     color: white;
 }
 
-#okay:hover {
+#okay:hover, #okay:focus {
     background-color: #D18E4F;
     color: white;
 }
 
-#good:hover {
+#good:hover, #good:focus {
     background-color: rgb(59, 138, 59);
     color: white;
 }
 
-#again:hover {
+#again:hover, #again:focus {
     background-color: #5EA3DE;
     color: white;
 }

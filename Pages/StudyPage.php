@@ -2,20 +2,22 @@
 
 session_start();
 
+//session variables needed
 $uname = $_SESSION['uname'];
 
+//The information given by the url
 $subject = $_GET['subject'];
 $unit = $_GET['Unit'];
 
-
-
-$path = $_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/' . $unit . '.csv';
+//Where the details of their quiz will be stored
 $recordsPath = $_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/Scores/' . $uname . '.csv';
 
-
+//this will open up the file in the path of the CSV file and then enter in read mode to ensure nothin will be changed
 if (($open = fopen($_SERVER['DOCUMENT_ROOT'] . '/Nea/Databases/' . $subject . '/' . $unit . '.csv', "r")) !== FALSE) {
-
+    //the use of '1000' here is simply to ensure it has passed through the entire array
+    //No study set would ever go over 1000 lines 
     while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+        //Creates an array for each line of the csv file, making it a 2d array
         $array[] = $data;
     }
 
@@ -37,11 +39,9 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Styles//StudyPage.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
     <title>Sudy hard!</title>
+
+    <link rel="stylesheet" href="../Styles/StudyPage.css">
 
     <!--The type module is needed to allow the imports of the file, in this case the MainFunctions class-->
     <script type="module" src="../Scripts/StudyPage.js" defer></script>
@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
                 <button id="bad">
                     Bad
                 </button>
-                <button id = "again">
+                <button id="again">
                     Again
                 </button>
             </div>
